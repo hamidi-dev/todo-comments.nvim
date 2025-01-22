@@ -25,6 +25,8 @@ local function todo(opts)
   opts = opts or {}
   opts.vimgrep_arguments = { Config.options.search.command }
   vim.list_extend(opts.vimgrep_arguments, Config.options.search.args)
+  -- Add arguments to search hidden files
+  vim.list_extend(opts.vimgrep_arguments, { "--hidden", "--glob", "!.git/*" })
 
   opts.search = Config.search_regex(keywords_filter(opts.keywords))
   opts.prompt_title = "Find Todo"
